@@ -1,0 +1,12 @@
+
+<div class="container">
+<div class="row">
+    <div class="container input-group">
+        <input type="text" name="price" class="form-control" placeholder="Recherche Par Titre" [(ngModel)]="titresearch">
+
+    </div>
+    <app-offre   class="col-4" style="margin-bottom: 25px" *ngFor="let o of ListOffre" [titre]="titresearch" [oChild]="o" (deleteEvent)="delete(o)">
+
+    </app-offre>
+</div>
+</div>

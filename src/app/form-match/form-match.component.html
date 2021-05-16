@@ -1,0 +1,95 @@
+<h1 *ngIf="!isAddMode">Modifier Offre De Match
+</h1>
+<h1 *ngIf="isAddMode">Ajouter Offre De Match
+</h1>
+<form #f="ngForm">
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Titre</label>
+            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre"
+                   [(ngModel)]="match.titre"
+                   required
+                   #t="ngModel" pattern="[a-zA-Z ]+">
+            <div class="alert-danger" *ngIf="t.invalid && t.touched">
+            <div class="alert-danger" *ngIf="t.errors.required">le champ Titre est obligatoire</div>
+            <div class="alert-danger" *ngIf="t.errors.pattern"> le champ Titre doit contenir seulements des lettres  </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Lieu</label>
+            <input type="text" class="form-control" id="inputPassword4" name="localisation"
+                   placeholder="Localisation" [(ngModel)]="match.localisation"  required
+                   #l="ngModel">
+            <div class="alert-danger" *ngIf="l.invalid && l.touched">
+                le champ Lieu est obligatoire
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCity">Date</label>
+            <input type="date" class="form-control" id="inputCity" name="date" [(ngModel)]="match.date"  required
+                   #d="ngModel">
+            <div class="alert-danger" *ngIf="d.invalid && d.touched">
+                Le champ date est obligatoire
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputState">Nombre de jouers</label>
+            <select id="inputState" class="form-control" name="nombre" [(ngModel)]="match.nombre" required
+                    #n="ngModel">
+
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+            </select>
+            <div *ngIf="n.invalid && (n.dirty || n.touched)"
+                 class="alert alert-danger">
+                <div *ngIf="n.errors.required">
+Veuillez selectionner le nombre de jouers
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputZip">durée de match en minute</label>
+            <input type="text" class="form-control" id="inputZip" name="duree" [(ngModel)]="match.duree"
+                   #duree="ngModel" pattern="[0-9][0-9]" required>
+            <div class="alert-danger" *ngIf="duree.invalid && duree.touched">
+
+                <div class="alert-danger" *ngIf="duree.errors.required">titre</div>
+                <div class="alert-danger" *ngIf="duree.errors.pattern"> format  </div>
+            </div>
+        </div>
+    </div>
+    <fieldset class="form-group">
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Arbitrage : (pas obligatoire)</legend>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input #a1="ngModel" class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="oui" [(ngModel)]="match.encadrement">
+                    <label class="form-check-label" name="arbitre" for="gridRadios1">
+                        avec arbitre
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input #a2="ngModel" class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="non" [(ngModel)]="match.encadrement">
+                    <label class="form-check-label" name="sansarbitre" for="gridRadios2">
+                        sans arbitre
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary" *ngIf="isAddMode" (click)="save()" [disabled]="f.invalid" >Enregistrer</button>
+    <button type="submit" class="btn btn-primary" *ngIf="!isAddMode" (click)="edit()" [disabled]="f.invalid" >modifier</button>
+
+</form>

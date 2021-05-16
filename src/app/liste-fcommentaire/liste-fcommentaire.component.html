@@ -1,0 +1,4 @@
+<app-form-commentaire [idmatch]="idmatch" (saveEvent)="save($event,idmatch)"> </app-form-commentaire>
+<div class="navbar-nav-scroll" style="max-height: 30vh">
+<app-commentaire *ngFor="let c of ListCommentaire" [cChild]="c"></app-commentaire>
+</div>

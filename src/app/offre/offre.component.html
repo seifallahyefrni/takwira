@@ -1,0 +1,33 @@
+
+<div class="card" style="width: 18rem;" *ngIf="oChild.titre.indexOf(titre)!=-1 || titre==null">
+    <img class="card-img-top" src="../../assets/football.jpg" alt="Card image cap">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+        <h5 class="card-title">{{oChild.titre}}</h5>
+            </div>
+          <app-participant [offre]="oChild"></app-participant>
+        </div>
+        <h6 class="card-title">Nombre : {{oChild.nombre}} jouers</h6>
+        <h6 class="card-title">Date :{{oChild.date  | date:'shortDate' }}</h6>
+        <h6 class="card-title">Lieu :{{oChild.localisation}}</h6>
+
+
+
+        <h6 class="card-title">Durée :{{oChild.duree}} minutes</h6>
+        <h6 *ngIf="oChild.encadrement" class="card-title">Avec arbitre</h6>
+        <h6 *ngIf="oChild.encadrement==null" class="card-title">Pas demande d'arbitre</h6>
+        <h6 *ngIf="oChild.encadrement==false" class="card-title">Sans arbitre</h6>
+
+        <div class="row">
+        <a href="#" class="btn btn-primary" style="width:300px" (click)="participer(oChild)">Participer</a>
+
+
+        <a [routerLink]="['edit', oChild.id]" style="width:137px" class="btn btn-success">Modifier</a>
+
+            <a href="#" class="btn btn-danger" style="width:137px"(click)="notify()">Supprimer</a>
+    </div>
+    </div>
+     <app-liste-fcommentaire [idmatch]="oChild.id"  ></app-liste-fcommentaire>
+
+</div>
